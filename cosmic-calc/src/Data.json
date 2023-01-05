@@ -1,16 +1,16 @@
 [
-    {
-    "email":"email@email.com",
-    "name":"name",
-    "password":"password",
-    "avatar":"avatar",
-    "score":"0"
-},
-{
-    "email":"email2@email.com",
-    "name":"name2",
-    "password":"password2",
-    "avatar":"avatar2",
-    "score":"5"
-}
+  {
+    "email": "email@email.com",
+    "name": "name",
+    "password": "password",
+    "avatar": "avatar",
+    "score": "0"
+  },
+  {
+    "email": "email2@email.com",
+    "name": "name2",
+    "password": "password2",
+    "avatar": "avatar2",
+    "score": "5"
+  }
 ]

@@ -1,76 +1,48 @@
-import React from 'react'
-import { useState } from 'react'
-import Profile from './Profile';
+// import React, { useEffect } from "react";
+import { useState } from "react";
+import Profile from "./Profile";
 
-import Data from '../Data.json'
+import Data from "../Data.json";
 
-export default function Login () {
+export default function Login() {
+  //check password and email against json file
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
 
-const [databasePassword, setDatabasePassword] = useState(null)
-
-const [payload, setPayload] = useState({
-    email: null,
-    password: null,
-  });
-
-  function onChangeEmail(e) {
-    let text = e.target.value;
-    setPayload({ ...payload, email: text });
-    console.log(text);
-  }
-
-  function onChangePassword(e) {
-    let text = e.target.value;
-    setPayload({ ...payload, password: text });
-    console.log(text);
-  }
-
-    function handleClick(e) {   
-        e.preventDefault()
-        const databasePassword = getPassword(payload.userName)
-        Authenticaiton(payload.password, databasePassword)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    for (let i = 0; i < Data.length; i++) {
+      if (email === Data[i].email && password === Data[i].password) {
+        setUser(Data[i]);
+        break;
+      }
     }
+  };
 
-    // get database password from get request Data.json
-const getPassword = (email) => {
-  const user = Data.find(user => user.email === email)
-  setDatabasePassword(user.password)
-  return user.password
-}
-
-const Authenticaiton = (password, databasePassword) => {
-  if (password === databasePassword) {
-      return (
-          <div>
-              <h1>Correct Password</h1>
-          </div>
-      )
-   } else {
-      return (
-          <div>
-              <h1>Incorrect Password</h1>
-          </div>
-      )
-}
-}
- 
   return (
     <div>
-        <h1>Login</h1>
-
-        <form>
-            <label className="email">Email</label>
-            <input type="email" name="email" id="email" onChange={onChangeEmail}/>
-
-            <label className="password">Password</label>
-            <input type="password" name="password" id="password" onChange={onChangePassword}/>
-
-            <button type="submit" onClick={handleClick}>Login</button>
-        </form>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Email:
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+      {user && <Profile user={user} />}
     </div>
-  )
+  );
 }
-
-
-
-
