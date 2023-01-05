@@ -1,11 +1,11 @@
 import React from "react";
-// import NextQButton from "../buttons/NextQButton";
 
-export default function AnswerCard(props) {
+export default function QuestionCard(props) {
   return (
     <div>
-      <h1>Hello world</h1>
-      {/* <NextQButton onClick={props.handleClick} h1="Next Question!" /> */}
+      <h1>
+        What is {props.questionValues[0]} × {props.questionValues[1]}?
+      </h1>
     </div>
   );
 }
