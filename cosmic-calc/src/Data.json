@@ -1,13 +1,13 @@
 [
     {
-    "email":"email.email.com",
+    "email":"email@email.com",
     "name":"name",
     "password":"password",
     "avatar":"avatar",
     "score":"0"
 },
 {
-    "email":"email2.email.com",
+    "email":"email2@email.com",
     "name":"name2",
     "password":"password2",
     "avatar":"avatar2",

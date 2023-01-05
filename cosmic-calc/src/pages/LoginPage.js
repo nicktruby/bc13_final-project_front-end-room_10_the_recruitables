@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
-import Profile from './profile'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import data from './Data.json'
+import Profile from './Profile';
+
+import Data from '../Data.json'
 
 export default function Login () {
 
-const [password, setPassword] = useState('')
+const [databasePassword, setDatabasePassword] = useState(null)
 
 const [payload, setPayload] = useState({
     email: null,
@@ -30,8 +30,30 @@ const [payload, setPayload] = useState({
         const databasePassword = getPassword(payload.userName)
         Authenticaiton(payload.password, databasePassword)
     }
+
+    // get database password from get request Data.json
+const getPassword = (email) => {
+  const user = Data.find(user => user.email === email)
+  setDatabasePassword(user.password)
+  return user.password
+}
+
+const Authenticaiton = (password, databasePassword) => {
+  if (password === databasePassword) {
+      return (
+          <div>
+              <h1>Correct Password</h1>
+          </div>
+      )
+   } else {
+      return (
+          <div>
+              <h1>Incorrect Password</h1>
+          </div>
+      )
+}
+}
  
-const LoginForm = () => {
   return (
     <div>
         <h1>Login</h1>
@@ -43,34 +65,12 @@ const LoginForm = () => {
             <label className="password">Password</label>
             <input type="password" name="password" id="password" onChange={onChangePassword}/>
 
-            <button type="submit" handleClick={handleClick}>Login</button>
+            <button type="submit" onClick={handleClick}>Login</button>
         </form>
     </div>
   )
 }
 
 
-// get database password from get request Data.json
-async function getPassword (email) {
-    const response = await fetch('http://localhost:3000/Data.json')
-    const data = await response.json()
-    const databasePassword = data.find((item) => item.email === email)
-    return databasePassword
-}
 
-
-const Authenticaiton = (password, databasePassword) => {
-    if (password === databasePassword) {
-        return (
-             <Profile />
-        )
-     } else {
-        return (
-            <div>
-                <h1>Incorrect Password</h1>
-            </div>
-        )
-}
-}
-}
 
