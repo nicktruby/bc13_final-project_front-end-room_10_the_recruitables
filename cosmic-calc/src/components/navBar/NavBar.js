@@ -1,10 +1,15 @@
 import React from "react";
 import { Nav, NavLink, NavMenu } from "./navBarElements";
+import logo from "./logo.png";
+import "./logo.css";
 
 const NavBar = () => {
   return (
     <>
       <Nav>
+        <fig>
+          <img className="logo" src={logo} alt="logo" />
+        </fig>
         <NavMenu>
           <NavLink to="/" activeStyle>
             login

@@ -6,7 +6,7 @@ export const Nav = styled.nav`
   background: #52366c;
   height: 85px;
   display: flex;
-  justify-content: right;
+  flex: 1;
   z-index: 12;
   textdecoration: ;
   font-family: "Bubblegum Sans", sans-serif;
