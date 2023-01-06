@@ -52,8 +52,9 @@
 //   );
 // }
 
-
 import React, { useState } from "react";
+
+import { timesTableCalculator } from "../components/functions/Functions";
 
 export default function Game() {
   const [num1, setNum1] = useState(Math.floor(Math.random() * 12) + 1);
@@ -62,19 +63,18 @@ export default function Game() {
   const [result, setResult] = useState("");
   const [score, setScore] = useState(0);
 
-
   const checkAnswer = () => {
     if (parseInt(answer) === num1 * num2) {
       setResult("Correct!");
       setScore(score + 1);
     } else {
-      setResult("Incorrect! The answer is " + num1 * num2);
+      setResult("Incorrect! The answer is " + num1 * num2 + " you tiny moron");
     }
   };
 
   const newQuestion = () => {
-    setNum1(Math.floor(Math.random() * 12) + 1);
-    setNum2(Math.floor(Math.random() * 12) + 1);
+    setNum1(timesTableCalculator(12));
+    setNum2(timesTableCalculator(12));
     setAnswer("");
     setResult("");
   };
@@ -83,7 +83,9 @@ export default function Game() {
     <div>
       <h1>Times Tables Game</h1>
       <h2>Score: {score}</h2>
-      <h2>What is {num1} x {num2}?</h2>
+      <h2>
+        What is {num1} x {num2}?
+      </h2>
       <input
         type="text"
         value={answer}
