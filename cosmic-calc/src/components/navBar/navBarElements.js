@@ -11,9 +11,10 @@ export const Nav = styled.nav`
   textdecoration: ;
   font-family: "Bubblegum Sans", sans-serif;
   font-weight: 900;
-  border-radius: 9%;
-  border: 1px solid darkblue;
+  border-radius: 5%;
   font-size: 18px;
+  borderbottomcolor: 1px #01aa31;
+  borderbottomstyle: groove;
 `;
 
 export const NavLink = styled(Link)`
@@ -22,10 +23,16 @@ export const NavLink = styled(Link)`
   align-items: center;
   text-decoration: none;
   padding: 0 1rem;
+  border-radius: 50%;
   height: 100%;
   cursor: pointer;
   &.active {
     color: red;
+    background: #01aa31;
+  }
+  &:hover {
+    color: rgba(255, 255, 255, 0.803);
+    transition: 0.2s ease-in-out;
   }
 `;
 

@@ -13,7 +13,7 @@
 :root {
   --colour-bg: #012a3e;
   --colour-bg2: #52366c;
-  --colour-primary: #01aa31;
+  --colour-primary: #00621c;
   --colour-secondary: #e79fc4;
   --colour-tertiary: #fce30a;
   --colour-white: #fff;
@@ -31,7 +31,7 @@ html {
 body {
   font-family: "Bubblegum Sans", sans-serif;
   background-color: var(--colour-bg);
-  color: white;
+  color: var(--colour-light);
   line-height: 1.7;
 }
 
@@ -48,7 +48,7 @@ h5 {
   font-weight: 500;
 }
 
-.btn {
+/* .btn {
   width: max-content;
   display: inline-block;
   color: var(--colour-primary);
@@ -67,4 +67,4 @@ h5 {
 .btn-primary {
   background-color: var(--colour-primary);
   color: var(--colour-bg);
-}
+} */
