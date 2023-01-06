@@ -6,7 +6,7 @@ const NavBar = () => {
     <>
       <Nav>
         <NavMenu>
-          <NavLink to="/login" activeStyle>
+          <NavLink to="/" activeStyle>
             login
           </NavLink>
           <NavLink to="/profile" activeStyle>

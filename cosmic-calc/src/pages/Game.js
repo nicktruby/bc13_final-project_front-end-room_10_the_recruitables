@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import QuestionCard from "../components/questioncard/QuestionCard";
 import AnswerCard from "../components/answercard/AnswerCard";
 import AnswerInput from "../components/input/AnswerInput";
-import NavBar from "../components/navBar/NavBar";
 
 import {
   timesTableCalculator,
@@ -40,14 +39,10 @@ export default function Game() {
   return (
     <div>
       <div>
-        <NavBar />
-      </div>
-      <div>
         <QuestionCard questionValues={newQuestionValues} />
         <AnswerInput onChange={onChangeInput} />
         <button onClick={handleSubmitAnswer}>Submit Answer</button>
       </div>
-
       {/* {checkAnswer(newQuestionValues, answerInput) && ( */}
       <div>
         <AnswerCard answerValue={answerValue} answerVisible={answerVisible} />
