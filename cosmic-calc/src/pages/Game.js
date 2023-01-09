@@ -1,57 +1,3 @@
-// import React, { useState } from "react";
-// import QuestionCard from "../components/questioncard/QuestionCard";
-// import AnswerCard from "../components/answercard/AnswerCard";
-// import AnswerInput from "../components/input/AnswerInput";
-
-// import {
-//   timesTableCalculator,
-//   multiply,
-//   checkAnswer,
-// } from "../components/functions/Functions";
-
-// export default function Game() {
-//   const [questionValueArray, setQuestionValueArray] = useState([]);
-//   const [answerInput, setAnswerInput] = useState();
-//   const [answerVisible, setAnswerVisible] = useState(false);
-
-//   const newQuestionValues = timesTableCalculator(12);
-
-//   console.log(`newQuestionValues=${newQuestionValues}`);
-//   // function handleClick() {
-//   //   setQuestionValueArray(newQuestionValues);
-//   // }
-
-//   const answerValue = multiply(newQuestionValues);
-//   console.log(`answerValue=${answerValue}`);
-
-//   function onChangeInput(e) {
-//     const answerInputNumber = Number(e.target.value);
-//     console.log(answerInputNumber);
-//     return answerInputNumber;
-//   }
-
-//   function handleSubmitAnswer(answerInputNumber) {
-//     timesTableCalculator(12);
-//     setAnswerInput(answerInputNumber);
-//     //setAnswerVisible(true);
-//   }
-
-//   return (
-//     <div>
-//       <div>
-//         <QuestionCard questionValues={newQuestionValues} />
-//         <AnswerInput onChange={onChangeInput} />
-//         <button onClick={handleSubmitAnswer}>Submit Answer</button>
-//       </div>
-//       {/* {checkAnswer(newQuestionValues, answerInput) && ( */}
-//       <div>
-//         <AnswerCard answerValue={answerValue} answerVisible={answerVisible} />
-//       </div>
-//       {/* )} */}
-//     </div>
-//   );
-// }
-
 import React, { useState } from "react";
 
 import { timesTableCalculator } from "../components/functions/Functions";
@@ -62,10 +8,12 @@ export default function Game() {
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState("");
   const [score, setScore] = useState(0);
-  const [showResults, setShowResults] = React.useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [noOfQuestions, setNoOfQuestions] = useState(0);
 
   const checkAnswer = () => {
     setShowResults(true);
+    setNoOfQuestions(noOfQuestions + 1);
     if (parseInt(answer) === num1 * num2) {
       setResult("Correct!");
       setScore(score + 1);
@@ -81,6 +29,17 @@ export default function Game() {
     setResult("");
     setShowResults(false);
   };
+
+  // async function updateScore(score, id) {
+  //   const response = await fetch(`http://localhost:3001/api/***/${id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(score),
+  //   });
+  //   const result = await response.json();
+  // }
 
   return (
     <div>
