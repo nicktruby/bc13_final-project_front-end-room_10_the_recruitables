@@ -3,6 +3,7 @@ import { Nav, NavLink, NavMenu } from "./navBarElements";
 import logo from "./logo.png";
 import "./logo.css";
 
+
 const NavBar = () => {
   return (
     <>
@@ -11,12 +12,13 @@ const NavBar = () => {
           <img className="logo" src={logo} alt="logo" />
         </fig>
         <NavMenu>
+       
           <NavLink to="/" activeStyle>
-            login
-          </NavLink>
-          <NavLink to="/profile" activeStyle>
             profile
           </NavLink>
+          {/* <NavLink to="/profile" activeStyle>
+            profile
+          </NavLink> */}
           <NavLink to="/progress" activeStyle>
             main
           </NavLink>
