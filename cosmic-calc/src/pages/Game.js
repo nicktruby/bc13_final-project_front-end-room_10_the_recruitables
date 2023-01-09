@@ -115,7 +115,7 @@ export default function Game() {
   };
 
   async function updateScore(score, id) {
-    const response = await fetch(`http://localhost:4000/api/users/${id}`, {
+    const response = await fetch(`http://localhost:3000/api/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -123,6 +123,7 @@ export default function Game() {
       body: JSON.stringify(score),
     });
     const result = await response.json();
+    console.log(`Patch request sent! Score was ${score} and id was ${id}`);
   }
 
   if (noOfQuestions < 10) {
@@ -149,7 +150,7 @@ export default function Game() {
       </div>
     );
   } else {
-    updateScore(score, id);
+    updateScore({ total_score: score }, id);
     return (
       <div>
         <h1>Game Over!</h1>
