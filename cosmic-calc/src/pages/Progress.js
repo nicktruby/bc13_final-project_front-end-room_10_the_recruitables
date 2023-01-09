@@ -5,7 +5,7 @@ import "./progress.css";
 import { useNavigate } from "react-router-dom";
 
 // icon/image array to be used instead/aswell as buttons. Passed as a prop to levelButtons.
-const icons = ["😀", "😁", "😂", "🤣", "😃", "😆", "😎", "👽", "👾", "🤖"];
+// const icons = ["😀", "😁", "😂", "🤣", "😃", "😆", "😎", "👽", "👾", "🤖"];
 
 export const Progress = () => {
   // state for score count of player
@@ -41,7 +41,7 @@ export const Progress = () => {
   // JSX below returns a grid container.
   // then maps over the levels array which returns a button for each new item in the array. Array increases depending on score. New item every 5 points = new button returned.
   return (
-    <div className="App">
+    <div className="progress-page">
       <button onClick={handleScoreIncrease}>MANUAL SCORE INCREASE</button>
       <div className="grid-container">
         {levels.map((levels, index) => (
@@ -49,9 +49,23 @@ export const Progress = () => {
             clickToGame={handleGotoLevel}
             key={levels.level}
             ButtonNumber={index + 1}
-            icon={icons[index]}
+            // icon={icons[index]}
           />
         ))}
+        <div className="track">
+          <img
+            src={require("../images/track1.png")}
+            alt="track-1"
+            className="track-1"
+            id="track-1"
+          ></img>
+          <img
+            src={require("../images/track2.png")}
+            alt="track-2"
+            className="track-2"
+            id="track-2"
+          ></img>
+        </div>
       </div>
     </div>
   );
