@@ -9,11 +9,23 @@ export default function Game() {
   const [answerVisible, setAnswerVisible] = useState(false);
   // const [nextQButtonVisible, setNextQButtonVisible] = useState(false);
   const [noOfQuestions, setNoOfQuestions] = useState(1);
+  const [totalScore, setTotalScore] = useState(0);
+
+// get request to get total_score
+  const getScore = async (id) => {
+    const response = await fetch(`http://localhost:3001/api/users/${id}`);
+    const data = await response.json();
+    console.log(data.payload.total_score);
+    setTotalScore(data.payload.total_score);
+
+  };
+
+
   const checkAnswer = () => {
     setNoOfQuestions(noOfQuestions + 1);
     if (parseInt(answer) === num1 * num2) {
       setResult("Correct!");
-      setScore(score + 1);
+      setScore(Number(score) + 1);
       // setAnswerVisible(false)
       newQuestion();
     } else {
@@ -29,24 +41,34 @@ export default function Game() {
     setResult("");
     setAnswerVisible(false);
   };
-  async function updateScore(score, id) {
+  
+  const updateScore = async (totalScore, score, id) => {
+    console.log("total", totalScore.total_score)
+    console.log("data", totalScore)
+    console.log("score", (score))
+    console.log("type", typeof(score))
+    let newTotal = score + totalScore;
+    console.log("newScore", newTotal)
+    console.log(typeof(totalScore))
+   
     const response = await fetch(`http://localhost:3001/api/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(score),
+      body: JSON.stringify(newTotal),
+
     });
     const data = await response.json();
     console.log(data);
-  }
+  };
   if (noOfQuestions < 4) {
     return (
       <div>
         <h1>Times Tables Game</h1>
         <h2>Score: {score}</h2>
         <h2>
-          {noOfQuestions}. What is {num1} x {num2}?
+          {noOfQuestions}. {num1} x {num2}=
         </h2>
         <input
           type="number"
@@ -70,6 +92,7 @@ export default function Game() {
       </div>
     );
   } else {
+    getScore(id);
     updateScore({ total_score: score }, id);
     return (
       <div>
