@@ -115,7 +115,7 @@ export default function Game() {
   };
 
   async function updateScore(score, id) {
-    const response = await fetch(`backendURL${id}`, {
+    const response = await fetch(`http://localhost:4000/api/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
