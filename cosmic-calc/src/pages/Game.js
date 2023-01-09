@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 export default function Game() {
   let id = 6;
   const [num1, setNum1] = useState(Math.floor(Math.random() * 12) + 1);
@@ -12,16 +12,21 @@ export default function Game() {
   const [totalScore, setTotalScore] = useState(0);
   const [payload, setPayload] = useState({});
 
-// get request to get total_score
-  const getScore = async (id) => {
-    const response = await fetch(`http://localhost:3001/api/users/${id}`);
-    const data = await response.json();
-    console.log(data.payload.total_score);
-    setPayload(data.payload);
-    setTotalScore(data.payload.total_score);
-    return data.payload.total_score;
-  };
+  // get request to get total_score
+  // const getScore = async (id) => {
+  //   const response = await fetch(`http://localhost:3000/api/users/${id}`);
+  //   const data = await response.json();
+  //   console.log(data.payload.total_score);
+  //   setPayload(data.payload);
+  //   setTotalScore(data.payload.total_score);
+  //   return data.payload.total_score;
+  // };
 
+  useEffect(() => {
+    if (noOfQuestions === 4) {
+      updateScore(score, id);
+    }
+  }, [noOfQuestions, score, id]);
 
   const checkAnswer = () => {
     setNoOfQuestions(noOfQuestions + 1);
@@ -43,24 +48,26 @@ export default function Game() {
     setResult("");
     setAnswerVisible(false);
   };
-  
-  const updateScore = async (payload, score, id) => {
-    console.log("total", totalScore)
-    console.log("data", payload)
-    console.log("score", (score.total_score))
-    console.log("type of score", typeof(score))
-    let newTotal = score.total_score + totalScore;
-    console.log("newScore", newTotal)
-    console.log(typeof(totalScore))
-    console.log("id", id)
-    const response = await fetch(`http://localhost:3001/api/users/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTotal),
 
-    });
+  const updateScore = async (score, id) => {
+    // console.log("total", totalScore);
+    // console.log("data", payload);
+    // console.log("score", score.total_score);
+    // console.log("type of score", typeof score);
+    // let newTotal = score.total_score + totalScore;
+    // console.log("newScore", newTotal);
+    // console.log(typeof totalScore);
+    // console.log("id", id);
+    const response = await fetch(
+      `http://localhost:3000/api/users/${id}/updateTotalScore`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ total_score: score }),
+      }
+    );
     const data = await response.json();
     console.log(data);
   };
@@ -94,8 +101,8 @@ export default function Game() {
       </div>
     );
   } else {
-    getScore(id);
-    updateScore(payload, { total_score: score }, id);
+    //getScore(id);
+
     return (
       <div>
         <h1>Game Over!</h1>
@@ -105,4 +112,3 @@ export default function Game() {
     );
   }
 }
-
