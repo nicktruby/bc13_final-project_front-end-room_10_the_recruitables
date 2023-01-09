@@ -62,13 +62,15 @@ export default function Game() {
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState("");
   const [score, setScore] = useState(0);
+  const [showResults, setShowResults] = React.useState(false);
 
   const checkAnswer = () => {
+    setShowResults(true);
     if (parseInt(answer) === num1 * num2) {
       setResult("Correct!");
       setScore(score + 1);
     } else {
-      setResult("Incorrect! The answer is " + num1 * num2 + " you tiny moron");
+      setResult("Incorrect! The answer is " + num1 * num2 + " cadet!");
     }
   };
 
@@ -77,6 +79,7 @@ export default function Game() {
     setNum2(timesTableCalculator(12));
     setAnswer("");
     setResult("");
+    setShowResults(false);
   };
 
   return (
@@ -91,9 +94,12 @@ export default function Game() {
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
       />
-      <button onClick={checkAnswer}>Check Answer</button>
+      {showResults ? (
+        <button onClick={newQuestion}>New Question</button>
+      ) : (
+        <button onClick={checkAnswer}>Check Answer</button>
+      )}
       <h3>{result}</h3>
-      <button onClick={newQuestion}>New Question</button>
     </div>
   );
 }
