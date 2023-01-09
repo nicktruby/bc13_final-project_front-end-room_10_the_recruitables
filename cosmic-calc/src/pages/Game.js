@@ -84,23 +84,26 @@
 
 import React, { useState } from "react";
 export default function Game() {
+  let id = 6;
   const [num1, setNum1] = useState(Math.floor(Math.random() * 12) + 1);
   const [num2, setNum2] = useState(Math.floor(Math.random() * 12) + 1);
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState("");
   const [score, setScore] = useState(0);
-  const [visible, setVisible] = useState(false);
+  const [answerVisible, setAnswerVisible] = useState(false);
+  const [nextQButtonVisible, setNextQButtonVisible] = useState(false);
   const [noOfQuestions, setNoOfQuestions] = useState(0);
   const checkAnswer = () => {
     if (parseInt(answer) === num1 * num2) {
       setResult("Correct!");
       setScore(score + 1);
-      setVisible(true);
+      // setAnswerVisible(false);
       setNoOfQuestions(noOfQuestions + 1);
       newQuestion();
     } else {
       setResult("Incorrect! The answer is " + num1 * num2);
-      setVisible(true);
+      setAnswerVisible(true);
+      setNextQButtonVisible(true);
     }
   };
   const newQuestion = () => {
@@ -108,8 +111,19 @@ export default function Game() {
     setNum2(Math.floor(Math.random() * 12) + 1);
     setAnswer("");
     setResult("");
-    setVisible(false);
+    setAnswerVisible(false);
   };
+
+  async function updateScore(score, id) {
+    const response = await fetch(`backendURL${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(score),
+    });
+    const result = await response.json();
+  }
 
   if (noOfQuestions < 10) {
     return (
@@ -128,13 +142,14 @@ export default function Game() {
         <h3>{result}</h3>
         <button
           onClick={newQuestion}
-          style={{ visibility: visible ? "visible" : "hidden" }}
+          style={{ visibility: answerVisible ? "visible" : "hidden" }}
         >
           Next Question
         </button>
       </div>
     );
   } else {
+    updateScore(score, id);
     return (
       <div>
         <h1>Game Over!</h1>
