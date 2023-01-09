@@ -10,14 +10,16 @@ export default function Game() {
   // const [nextQButtonVisible, setNextQButtonVisible] = useState(false);
   const [noOfQuestions, setNoOfQuestions] = useState(1);
   const [totalScore, setTotalScore] = useState(0);
+  const [payload, setPayload] = useState({});
 
 // get request to get total_score
   const getScore = async (id) => {
     const response = await fetch(`http://localhost:3001/api/users/${id}`);
     const data = await response.json();
     console.log(data.payload.total_score);
+    setPayload(data.payload);
     setTotalScore(data.payload.total_score);
-
+    return data.payload.total_score;
   };
 
 
@@ -42,15 +44,15 @@ export default function Game() {
     setAnswerVisible(false);
   };
   
-  const updateScore = async (totalScore, score, id) => {
-    console.log("total", totalScore.total_score)
-    console.log("data", totalScore)
-    console.log("score", (score))
-    console.log("type", typeof(score))
-    let newTotal = score + totalScore;
+  const updateScore = async (payload, score, id) => {
+    console.log("total", totalScore)
+    console.log("data", payload)
+    console.log("score", (score.total_score))
+    console.log("type of score", typeof(score))
+    let newTotal = score.total_score + totalScore;
     console.log("newScore", newTotal)
     console.log(typeof(totalScore))
-   
+    console.log("id", id)
     const response = await fetch(`http://localhost:3001/api/users/${id}`, {
       method: "PATCH",
       headers: {
@@ -93,7 +95,7 @@ export default function Game() {
     );
   } else {
     getScore(id);
-    updateScore({ total_score: score }, id);
+    updateScore(payload, { total_score: score }, id);
     return (
       <div>
         <h1>Game Over!</h1>
@@ -103,3 +105,4 @@ export default function Game() {
     );
   }
 }
+
