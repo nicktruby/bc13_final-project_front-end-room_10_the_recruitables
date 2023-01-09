@@ -1,3 +1,10 @@
+//PLAN 
+//Step 1: Get rid of the'next question' button
+//Step 2: Introduce new state for number of questions
+//Step 3: Introduce function so that game ends when no of Qs = 10
+//Step 4: Display game over text when no of Qs = 10
+//Step 5: Send patch request to database once game has finished
+
 import React, { useState } from "react";
 
 import { timesTableCalculator } from "../components/functions/Functions";
@@ -45,8 +52,8 @@ export default function Game() {
     <div>
       <h1>Times Tables Game</h1>
       <h2>Score: {score}</h2>
-      <h2>
-        What is {num1} x {num2}?
+      {if (noOfQuestions<10) {<h2>
+       return() What is {num1} x {num2}?
       </h2>
       <input
         type="text"
@@ -58,7 +65,8 @@ export default function Game() {
       ) : (
         <button onClick={checkAnswer}>Check Answer</button>
       )}
-      <h3>{result}</h3>
+      <h3>{result}</h3>}  }
+      
     </div>
   );
 }
