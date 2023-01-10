@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import "./game.css";
+
+
 export default function Game() {
   let id = 6;
   const [num1, setNum1] = useState(Math.floor(Math.random() * 12) + 1);
@@ -36,7 +39,7 @@ export default function Game() {
       // setAnswerVisible(false)
       newQuestion();
     } else {
-      setResult("Incorrect! The answer is " + num1 * num2);
+      setResult(num1 * num2);
       setAnswerVisible(true);
       // setNextQButtonVisible(true);
     }
@@ -73,13 +76,27 @@ export default function Game() {
   };
   if (noOfQuestions < 4) {
     return (
-      <div>
-        <h1>Times Tables Game</h1>
-        <h2>Score: {score}</h2>
-        <h2>
-          {noOfQuestions}. {num1} x {num2}=
+      <div className="gameDiv">
+      <div className="answerDiv" style={{ visibility: answerVisible ? "visible" : "hidden" }}>
+      <div className="statementDiv" style={{ visibility: answerVisible ? "visible" : "hidden" }}>
+        <h3 className="h3ResultGame">The correct answer is:  </h3>
+       <h3 className="h3ResultAnswerGame">{result}</h3>
+       </div>
+        <button className="newQuestionGame"
+          onClick={newQuestion}
+          style={{ visibility: answerVisible ? "visible" : "hidden" }}
+        >
+          Next Question
+        </button>
+        </div>
+        <div className="questionDiv">
+        <h2 className="h2QuestionGame">
+          {noOfQuestions + ")  "}
         </h2>
-        <input
+        <h2 className="h2QuestionGame">
+        {num1} x {num2} =
+        </h2>
+        <input className="inputGame"
           type="number"
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
@@ -90,14 +107,11 @@ export default function Game() {
             }
           }}
         />
-        <button onClick={checkAnswer}>Check Answer</button>
-        <h3>{result}</h3>
-        <button
-          onClick={newQuestion}
-          style={{ visibility: answerVisible ? "visible" : "hidden" }}
-        >
-          Next Question
-        </button>
+        <button className="buttonGame" onClick={checkAnswer}>Check Answer</button>
+        </div>
+        <div className="scoreDiv">
+        <h2 className="h2ScoreGame">Score: {score}</h2>
+        </div>
       </div>
     );
   } else {

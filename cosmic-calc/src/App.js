@@ -5,6 +5,8 @@ import Game from "./pages/Game";
 import Progress from "./pages/Progress";
 import NavBar from "./components/navBar/NavBar";
 
+
+
 export default function App() {
   return (
     <div>

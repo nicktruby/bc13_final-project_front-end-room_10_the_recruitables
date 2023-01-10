@@ -1,0 +1,101 @@
+.gameDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* justify-content: space-evenly; */
+    height: 100vh;
+    width: 100vw;
+    /* background-color: rgb(4, 39, 114); */
+    color: #fff;
+}
+
+.answerDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: 70vw;
+    padding: 2vh;
+    color: #fff;
+}
+
+.questionDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: auto;
+    width: 70vw;
+    background-color: rgba(128, 0, 128, 0.544);
+    border-radius: 10px;
+    padding: 4vh;
+    border-color: purple;
+    border-style: solid;
+    border-width: 10px;
+    color: #fff;
+    margin: 5vh;
+}
+
+.scoreDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: 30vw;
+    background-color: rgba(0, 128, 2, 0.45);
+    padding: 2vh;
+    border-radius: 10px;
+    border-color: rgb(0, 128, 126);
+    border-style: solid;
+    border-width: 10px;
+    color: #fff;
+}
+
+.statementDiv{
+    display: flex;
+    flex-direction: row;
+    padding: 2vh;
+    border-radius: 10px;
+    background:rgba(18, 165, 2, 0.582);
+    border-color: rgb(18, 165, 2);
+    border-style: solid;
+    border-width: 10px;
+    color: #fff;
+    margin: 2vw;
+}
+
+.newQuestionGame{
+    padding: 2vw;
+    border-radius: 10px;
+    background:rgba(167, 4, 113, 0.597);
+    border-color: rgb(167, 4, 112);
+    border-style: solid;
+    border-width: 10px;
+    color: #fff;
+    margin: 2vw;
+}
+
+.buttonGame{
+    padding: 2vw;
+    border-radius: 10px;
+    background:rgba(222, 108, 8, 0.582);
+    border-color: rgb(222, 108, 8);
+    border-style: solid;
+    border-width: 10px;
+    color: #fff;
+    margin: 2vw;
+}
+
+.h2QuestionGame{
+    font-size: 5vw;
+}
+
+.h3ResultAnswerGame{
+    font-size: 3vw;
+    margin-left: 2vw;
+}
+
+

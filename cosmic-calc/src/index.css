@@ -30,7 +30,7 @@ html {
 
 body {
   font-family: "Bubblegum Sans", sans-serif;
-  background-color: var(--colour-bg);
+  /* background-color: var(--colour-bg); */
   color: var(--colour-light);
   line-height: 1.7;
 }
