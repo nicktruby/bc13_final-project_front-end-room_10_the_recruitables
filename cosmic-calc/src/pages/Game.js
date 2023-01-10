@@ -76,46 +76,53 @@ export default function Game() {
   if (noOfQuestions < 4) {
     return (
       <div className="gameDiv">
-      <div className="answerDiv" style={{ visibility: answerVisible ? "visible" : "hidden" }}>
-      <div className="statementDiv" style={{ visibility: answerVisible ? "visible" : "hidden" }}>
-        <h3 className="h3ResultGame">The correct answer is:  </h3>
-       <h3 className="h3ResultAnswerGame">{result}</h3>
-       </div>
-        <button className="newQuestionGame"
-          onClick={newQuestion}
+        <div
+          className="answerDiv"
           style={{ visibility: answerVisible ? "visible" : "hidden" }}
         >
-          Next Question
-        </button>
+          <div
+            className="statementDiv"
+            style={{ visibility: answerVisible ? "visible" : "hidden" }}
+          >
+            <h3 className="h3ResultGame">The correct answer is: </h3>
+            <h3 className="h3ResultAnswerGame">{result}</h3>
+          </div>
+          <button
+            className="newQuestionGame"
+            onClick={newQuestion}
+            style={{ visibility: answerVisible ? "visible" : "hidden" }}
+          >
+            Next Question
+          </button>
         </div>
         <div className="questionDiv">
-        <h2 className="h2QuestionGame">
-          {noOfQuestions + ")  "}
-        </h2>
-        <h2 className="h2QuestionGame">
-        {num1} x {num2} =
-        </h2>
-        <input className="inputGame"
-          type="number"
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          onKeyDown={(e) => {
-            console.log(e);
-            if (e.key === "Enter") {
-              checkAnswer();
-            }
-          }}
-        />
-        <button className="buttonGame" onClick={checkAnswer}>Check Answer</button>
+          <h2 className="h2QuestionGame">{noOfQuestions + ")  "}</h2>
+          <h2 className="h2QuestionGame">
+            {num1} x {num2} =
+          </h2>
+          <input
+            className="inputGame"
+            type="number"
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            onKeyDown={(e) => {
+              console.log(e);
+              if (e.key === "Enter") {
+                checkAnswer();
+              }
+            }}
+          />
+          <button className="buttonGame" onClick={checkAnswer}>
+            Check Answer
+          </button>
         </div>
         <div className="scoreDiv">
-        <h2 className="h2ScoreGame">Score: {score}</h2>
+          <h2 className="h2ScoreGame">Score: {score}</h2>
         </div>
       </div>
     );
   } else {
     //getScore(id);
-
 
     return (
       <div>
@@ -125,5 +132,4 @@ export default function Game() {
       </div>
     );
   }
-  );
 }
