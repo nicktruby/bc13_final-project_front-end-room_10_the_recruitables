@@ -4,6 +4,7 @@ import Profile from "./pages/Profile";
 import Game from "./pages/Game";
 import Progress from "./pages/Progress";
 import NavBar from "./components/navBar/NavBar";
+import "./App.css";
 
 export default function App() {
   return (

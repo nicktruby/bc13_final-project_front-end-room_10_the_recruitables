@@ -5,7 +5,7 @@ import "./logo.css";
 
 const NavBar = () => {
   return (
-    <>
+    <div className="nav-bar">
       <Nav>
         <fig>
           <img className="logo" src={logo} alt="logo" />
@@ -25,7 +25,7 @@ const NavBar = () => {
           </NavLink>
         </NavMenu>
       </Nav>
-    </>
+    </div>
   );
 };
 
