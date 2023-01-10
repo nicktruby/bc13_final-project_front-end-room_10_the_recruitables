@@ -1,22 +1,53 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
+//when user is logged into firebase display data from the users firestore collection
 
-const Profile = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebaseConfig";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
+function Profile() {
+  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (userData) => {
+      if (userData) {
+        setUserData(userData);
+      } else {
+        setUserData(null);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const db = getFirestore();
+    const userCollection = collection(db, "users");
+    getDocs(userCollection).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().email === user.email) {
+          setUserData(doc.data());
+        }
+      });
+    });
+  }, [user]);
   return (
-    isAuthenticated && (
-      <div>
-        <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-      </div>
-    )
+    <div>
+      <h3>Profile</h3>
+      <h4>{user?.email}</h4>
+      <h4>{userData?.displayName}</h4>
+      <h4>{userData?.score}</h4>
+    </div>
   );
-};
+}
 
 export default Profile;
