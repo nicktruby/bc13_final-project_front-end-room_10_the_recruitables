@@ -1,110 +1,129 @@
-// import React, { useState } from "react";
-// import QuestionCard from "../components/questioncard/QuestionCard";
-// import AnswerCard from "../components/answercard/AnswerCard";
-// import AnswerInput from "../components/input/AnswerInput";
-
-// import {
-//   timesTableCalculator,
-//   multiply,
-//   checkAnswer,
-// } from "../components/functions/Functions";
-
-// export default function Game() {
-//   const [questionValueArray, setQuestionValueArray] = useState([]);
-//   const [answerInput, setAnswerInput] = useState();
-//   const [answerVisible, setAnswerVisible] = useState(false);
-
-//   const newQuestionValues = timesTableCalculator(12);
-
-//   console.log(`newQuestionValues=${newQuestionValues}`);
-//   // function handleClick() {
-//   //   setQuestionValueArray(newQuestionValues);
-//   // }
-
-//   const answerValue = multiply(newQuestionValues);
-//   console.log(`answerValue=${answerValue}`);
-
-//   function onChangeInput(e) {
-//     const answerInputNumber = Number(e.target.value);
-//     console.log(answerInputNumber);
-//     return answerInputNumber;
-//   }
-
-//   function handleSubmitAnswer(answerInputNumber) {
-//     timesTableCalculator(12);
-//     setAnswerInput(answerInputNumber);
-//     //setAnswerVisible(true);
-//   }
-
-//   return (
-//     <div>
-//       <div>
-//         <QuestionCard questionValues={newQuestionValues} />
-//         <AnswerInput onChange={onChangeInput} />
-//         <button onClick={handleSubmitAnswer}>Submit Answer</button>
-//       </div>
-//       {/* {checkAnswer(newQuestionValues, answerInput) && ( */}
-//       <div>
-//         <AnswerCard answerValue={answerValue} answerVisible={answerVisible} />
-//       </div>
-//       {/* )} */}
-//     </div>
-//   );
-// }
-
-import React, { useState } from "react";
-
-import { timesTableCalculator } from "../components/functions/Functions";
-import NavBar from "../components/navBar/NavBar";
+import React, { useState, useEffect } from "react";
+import "./game.css";
 
 export default function Game() {
+  let id = 6;
   const [num1, setNum1] = useState(Math.floor(Math.random() * 12) + 1);
   const [num2, setNum2] = useState(Math.floor(Math.random() * 12) + 1);
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState("");
   const [score, setScore] = useState(0);
-  const [showResults, setShowResults] = React.useState(false);
+  const [answerVisible, setAnswerVisible] = useState(false);
+  // const [nextQButtonVisible, setNextQButtonVisible] = useState(false);
+  const [noOfQuestions, setNoOfQuestions] = useState(1);
+  const [totalScore, setTotalScore] = useState(0);
+  const [payload, setPayload] = useState({});
+
+  // get request to get total_score
+  // const getScore = async (id) => {
+  //   const response = await fetch(`http://localhost:3000/api/users/${id}`);
+  //   const data = await response.json();
+  //   console.log(data.payload.total_score);
+  //   setPayload(data.payload);
+  //   setTotalScore(data.payload.total_score);
+  //   return data.payload.total_score;
+  // };
+
+  useEffect(() => {
+    if (noOfQuestions === 4) {
+      updateScore(score, id);
+    }
+  }, [noOfQuestions, score, id]);
 
   const checkAnswer = () => {
-    setShowResults(true);
+    setNoOfQuestions(noOfQuestions + 1);
     if (parseInt(answer) === num1 * num2) {
       setResult("Correct!");
-      setScore(score + 1);
+      setScore(Number(score) + 1);
+      // setAnswerVisible(false)
+      newQuestion();
     } else {
-      setResult("Incorrect! The answer is " + num1 * num2 + " cadet!");
+      setResult(num1 * num2);
+      setAnswerVisible(true);
+      // setNextQButtonVisible(true);
     }
   };
-
   const newQuestion = () => {
-    setNum1(timesTableCalculator(12));
-    setNum2(timesTableCalculator(12));
+    setNum1(Math.floor(Math.random() * 12) + 1);
+    setNum2(Math.floor(Math.random() * 12) + 1);
     setAnswer("");
     setResult("");
-    setShowResults(false);
+    setAnswerVisible(false);
   };
 
-  return (
-    <div>
-      <NavBar />
-      <h1>Times Tables Game</h1>
-      <h2>Score: {score}</h2>
-      <h2>
-        What is {num1} x {num2}?
-      </h2>
-      <h2>
-        What is {num1} x {num2}?
-      </h2>
-      <input
-        type="text"
-        value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
-      />
-      {showResults ? (
-        <button onClick={newQuestion}>New Question</button>
-      ) : (
-        <button onClick={checkAnswer}>Check Answer</button>
-      )}
-      <h3>{result}</h3>
-    </div>
+  const updateScore = async (score, id) => {
+    // console.log("total", totalScore);
+    // console.log("data", payload);
+    // console.log("score", score.total_score);
+    // console.log("type of score", typeof score);
+    // let newTotal = score.total_score + totalScore;
+    // console.log("newScore", newTotal);
+    // console.log(typeof totalScore);
+    // console.log("id", id);
+    const response = await fetch(
+      `http://localhost:3000/api/users/${id}/updateTotalScore`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ total_score: score }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+  if (noOfQuestions < 4) {
+    return (
+      <div className="gameDiv">
+      <div className="answerDiv" style={{ visibility: answerVisible ? "visible" : "hidden" }}>
+      <div className="statementDiv" style={{ visibility: answerVisible ? "visible" : "hidden" }}>
+        <h3 className="h3ResultGame">The correct answer is:  </h3>
+       <h3 className="h3ResultAnswerGame">{result}</h3>
+       </div>
+        <button className="newQuestionGame"
+          onClick={newQuestion}
+          style={{ visibility: answerVisible ? "visible" : "hidden" }}
+        >
+          Next Question
+        </button>
+        </div>
+        <div className="questionDiv">
+        <h2 className="h2QuestionGame">
+          {noOfQuestions + ")  "}
+        </h2>
+        <h2 className="h2QuestionGame">
+        {num1} x {num2} =
+        </h2>
+        <input className="inputGame"
+          type="number"
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+          onKeyDown={(e) => {
+            console.log(e);
+            if (e.key === "Enter") {
+              checkAnswer();
+            }
+          }}
+        />
+        <button className="buttonGame" onClick={checkAnswer}>Check Answer</button>
+        </div>
+        <div className="scoreDiv">
+        <h2 className="h2ScoreGame">Score: {score}</h2>
+        </div>
+      </div>
+    );
+  } else {
+    //getScore(id);
+
+
+    return (
+      <div>
+        <h1>Game Over!</h1>
+        <h2>Your final score was {score}</h2>
+        <button onClick={newQuestion}>Play Again</button>
+      </div>
+    );
+  }
   );
 }
