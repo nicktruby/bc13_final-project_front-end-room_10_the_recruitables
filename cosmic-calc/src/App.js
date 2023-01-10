@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
 import Game from "./pages/Game";
 import Progress from "./pages/Progress";
-import NavBar from "./components/navBar/NavBar";
+// import NavBar from "./components/navBar/NavBar";
 import Login from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import ProtectedRoute from "./components/Authentication/requireAuth";
@@ -12,7 +12,6 @@ export default function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />

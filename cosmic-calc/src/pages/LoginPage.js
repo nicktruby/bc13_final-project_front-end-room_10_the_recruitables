@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import {
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { createUserDocument } from "./firebaseConfig";
 import { auth } from "./firebaseConfig";
 import { useNavigate } from "react-router-dom";
+import NavBarLogin from "../components/navBar/NavBarLogin";
 
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -42,16 +39,9 @@ function Login() {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div>
+      <NavBarLogin />
       <form onSubmit={handleLogin}>
         <input
           type="text"
@@ -67,7 +57,6 @@ function Login() {
         />
         <button type="submit">Login</button>
       </form>
-      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }
