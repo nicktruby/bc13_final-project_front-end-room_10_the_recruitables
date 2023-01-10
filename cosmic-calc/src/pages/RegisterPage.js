@@ -5,8 +5,8 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { useState, useEffect } from "react";
-// import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import NavBarLogin from "../components/navBar/NavBarLogin";
 
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -49,6 +49,7 @@ function Register() {
 
   return (
     <div>
+      <NavBarLogin />
       <form onSubmit={handleRegister}>
         <input
           type="text"

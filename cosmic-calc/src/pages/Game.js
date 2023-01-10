@@ -55,6 +55,7 @@
 import React, { useState } from "react";
 
 import { timesTableCalculator } from "../components/functions/Functions";
+import NavBar from "../components/navBar/NavBar";
 
 export default function Game() {
   const [num1, setNum1] = useState(Math.floor(Math.random() * 12) + 1);
@@ -84,8 +85,12 @@ export default function Game() {
 
   return (
     <div>
+      <NavBar />
       <h1>Times Tables Game</h1>
       <h2>Score: {score}</h2>
+      <h2>
+        What is {num1} x {num2}?
+      </h2>
       <h2>
         What is {num1} x {num2}?
       </h2>

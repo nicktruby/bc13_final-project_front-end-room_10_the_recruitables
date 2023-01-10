@@ -39,8 +39,7 @@ export const NavLink = styled(Link)`
 
 export const NavMenu = styled.div`
   display: flex;
-  padding-left: 30cm;
-
+  padding-left: 70%;
   align-items: right;
   justifycontent: flex-end;
   @media screen and (max-width: 800px) {

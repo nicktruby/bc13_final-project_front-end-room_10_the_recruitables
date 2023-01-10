@@ -11,12 +11,6 @@ const NavBar = () => {
       <Nav>
         <img src={logo} alt="logo" className="logo" />
         <NavMenu>
-          <NavLink to="/" activeStyle>
-            login
-          </NavLink>
-          <NavLink to="/register" activeStyle>
-            register
-          </NavLink>
           <NavLink to="/profile" activeStyle>
             Profile
           </NavLink>
