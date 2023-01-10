@@ -7,7 +7,7 @@ import Logout from "../Authentication/Logout";
 
 const NavBar = () => {
   return (
-    <>
+    <div className="nav-bar">
       <Nav>
         <img src={logo} alt="logo" className="logo" />
         <NavMenu>
@@ -31,7 +31,7 @@ const NavBar = () => {
           </NavLink>
         </NavMenu>
       </Nav>
-    </>
+    </div>
   );
 };
 
