@@ -1,48 +1,64 @@
-// import React, { useEffect } from "react";
-import { useState } from "react";
-import Profile from "./Profile";
+import { useState, useEffect } from "react";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserDocument } from "./firebaseConfig";
+import { auth } from "./firebaseConfig";
+import { useNavigate } from "react-router-dom";
+import NavBarLogin from "../components/navBar/NavBarLogin";
 
-import Data from "../Data.json";
+function Login() {
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [, setUser] = useState(null);
 
-export default function Login() {
-  //check password and email against json file
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    for (let i = 0; i < Data.length; i++) {
-      if (email === Data[i].email && password === Data[i].password) {
-        setUser(Data[i]);
-        break;
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
       }
+    });
+  }, []);
+
+  let navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const { user } = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      await createUserDocument(user);
+      setLoginEmail("");
+      setLoginPassword("");
+      navigate("/profile");
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
     <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <input type="submit" value="Submit" />
+      <NavBarLogin />
+      <form onSubmit={handleLogin}>
+        <input
+          type="text"
+          placeholder="email"
+          value={loginEmail}
+          onChange={(e) => setLoginEmail(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="password"
+          value={loginPassword}
+          onChange={(e) => setLoginPassword(e.target.value)}
+        />
+        <button type="submit">Login</button>
       </form>
-      {user && <Profile user={user} />}
     </div>
   );
 }
+
+export default Login;

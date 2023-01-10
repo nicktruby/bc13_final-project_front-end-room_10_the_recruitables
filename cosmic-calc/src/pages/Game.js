@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./game.css";
 
-
 export default function Game() {
   let id = 6;
   const [num1, setNum1] = useState(Math.floor(Math.random() * 12) + 1);
@@ -117,6 +116,7 @@ export default function Game() {
   } else {
     //getScore(id);
 
+
     return (
       <div>
         <h1>Game Over!</h1>
@@ -125,4 +125,5 @@ export default function Game() {
       </div>
     );
   }
+  );
 }
