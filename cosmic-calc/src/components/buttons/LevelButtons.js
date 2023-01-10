@@ -1,11 +1,15 @@
 import React from "react";
 import "./levelButtons.css";
 
-function LevelButtons({ ButtonNumber, icon, clickToGame }) {
+function LevelButtons({ ButtonNumber, clickToGame }) {
   return (
     <div className="levelButton">
-      <button onClick={clickToGame} id={`levelButton-${ButtonNumber}`}>
-        BUTTON {ButtonNumber} {icon}
+      <button
+        className={"levelButtons"}
+        onClick={clickToGame}
+        id={`levelButton-${ButtonNumber}`}
+      >
+        {/* BUTTON {ButtonNumber} */}
       </button>
     </div>
   );

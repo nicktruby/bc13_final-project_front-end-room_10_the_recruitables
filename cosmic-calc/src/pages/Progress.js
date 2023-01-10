@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "../components/navBar/NavBar";
 
 // icon/image array to be used instead/aswell as buttons. Passed as a prop to levelButtons.
-const icons = ["😀", "😁", "😂", "🤣", "😃", "😆", "😎", "👽", "👾", "🤖"];
+// const icons = ["😀", "😁", "😂", "🤣", "😃", "😆", "😎", "👽", "👾", "🤖"];
 
 export const Progress = () => {
   // state for score count of player
   const [score, setScore] = useState(0);
   // count for array of levels. New level pushed into array ever X amount of points. Then mapped below to return a new button each time score level reached.
-  const [levels, setLevels] = useState([1]);
+  const [levels, setLevels] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
   // handles bringing in new buttons when the score increases. Set to new button every 5 points. Added button to manually increase score in the mean time - will remove later.
   function handleScoreIncrease() {
@@ -42,7 +42,7 @@ export const Progress = () => {
   // JSX below returns a grid container.
   // then maps over the levels array which returns a button for each new item in the array. Array increases depending on score. New item every 5 points = new button returned.
   return (
-    <div className="progress">
+    <div className="progress-page">
       <NavBar />
       <button onClick={handleScoreIncrease}>MANUAL SCORE INCREASE</button>
       <div className="grid-container">
@@ -51,7 +51,7 @@ export const Progress = () => {
             clickToGame={handleGotoLevel}
             key={levels.level}
             ButtonNumber={index + 1}
-            icon={icons[index]}
+            // icon={icons[index]}
           />
         ))}
       </div>

@@ -8,6 +8,7 @@ import Register from "./pages/RegisterPage";
 import ProtectedRoute from "./components/Authentication/requireAuth";
 // import Logout from "./components/Authentication/Logout";
 
+
 export default function App() {
   return (
     <div className="App">
