@@ -12,16 +12,32 @@ export const Progress = () => {
   // state for score count of player
   const [score, setScore] = useState(0);
   // count for array of levels. New level pushed into array ever X amount of points. Then mapped below to return a new button each time score level reached.
-  const [levels, setLevels] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const [levels, setLevels] = useState([1]);
+  const [lockLevels, setLockLevels] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9])
+  const [payload, setPayload] = useState([])
+  const [totalScore, setTotalScore] = useState()
 
   // handles bringing in new buttons when the score increases. Set to new button every 5 points. Added button to manually increase score in the mean time - will remove later.
   function handleScoreIncrease() {
-    let newScore = score + 1;
-    setScore(newScore);
-    console.log(score);
-    if (score === 0) {
+
+    // get request to get total_score
+    const getScore = async (id) => {
+      const response = await fetch(`http://localhost:4000/api/users/${id}`);
+      const data = await response.json();
+      console.log(data.payload.total_score);
+      setPayload(data.payload);
+      setTotalScore(data.payload.total_score);
+      return data.payload.total_score;
+    };
+
+    getScore(5)
+
+    // let newScore = score + 1;
+    // setScore(newScore);
+    // console.log(score);
+    if (totalScore === 0) {
       return;
-    } else if (score % 5 === 0) {
+    } else if (totalScore % 5 === 0) {
       let newLevel = score + 1;
       setLevels((addNewLevel) => [...addNewLevel, newLevel]);
       console.log("this is levels array", levels);
@@ -47,13 +63,25 @@ export const Progress = () => {
       <button onClick={handleScoreIncrease}>MANUAL SCORE INCREASE</button>
       <div className="grid-container">
         {levels.map((levels, index) => (
+
           <LevelButtons
             clickToGame={handleGotoLevel}
             key={levels.level}
-            ButtonNumber={index + 1}
-            // icon={icons[index]}
+            ButtonNumber={index + 1 + '-unlock'}
+            
           />
         ))}
+        {lockLevels.map((level, index) => (
+        <LevelButtons
+          
+          key={levels.level}
+          ButtonNumber={index + 1 + '-lock'}
+          
+          
+        />
+      ))}
+
+        
       </div>
     </div>
   );
