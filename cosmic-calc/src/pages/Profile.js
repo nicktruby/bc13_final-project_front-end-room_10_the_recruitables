@@ -1,15 +1,53 @@
-import React from "react";
-// import Data from "../Data.json";
+//when user is logged into firebase display data from the users firestore collection
 
-const Profile = (user) => {
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebaseConfig";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+function Profile() {
+  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (userData) => {
+      if (userData) {
+        setUserData(userData);
+      } else {
+        setUserData(null);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const db = getFirestore();
+    const userCollection = collection(db, "users");
+    getDocs(userCollection).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().email === user.email) {
+          setUserData(doc.data());
+        }
+      });
+    });
+  }, [user]);
   return (
     <div>
-      <h1>Profile</h1>
-      <p>name: {user.user.name}</p>
-      <p>email: {user.user.email}</p>
-      <p>score: {user.user.score}</p>
+      <h3>Profile</h3>
+      <h4>{user?.email}</h4>
+      <h4>{userData?.displayName}</h4>
+      <h4>{userData?.score}</h4>
     </div>
   );
-};
+}
 
 export default Profile;

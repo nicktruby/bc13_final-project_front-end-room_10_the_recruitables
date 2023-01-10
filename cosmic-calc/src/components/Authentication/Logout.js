@@ -1,14 +1,25 @@
-import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+//logout button for the user to sign out firebase
 
-const LogoutButton = (props) => {
-  const { logout } = useAuth0();
+import { signOut } from "firebase/auth";
+import { auth } from "../../pages/firebaseConfig";
+import { useNavigate } from "react-router-dom";
+
+function Logout() {
+  let navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <button onClick={() => logout({ returnTo: window.location.origin })} hideButton={props.hideButton} hidden={props.hidden}>
-      Log Out
-    </button>
+    <div>
+      <button onClick={handleLogout}>Logout</button>
+    </div>
   );
-};
+}
 
-export default LogoutButton;
+export default Logout;
