@@ -11,7 +11,7 @@ export const Progress = () => {
   // state for score count of player
   const [score, setScore] = useState(0);
   // count for array of levels. New level pushed into array ever X amount of points. Then mapped below to return a new button each time score level reached.
-  const [levels, setLevels] = useState([1]);
+  const [levels, setLevels] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
   // handles bringing in new buttons when the score increases. Set to new button every 5 points. Added button to manually increase score in the mean time - will remove later.
   function handleScoreIncrease() {
@@ -52,20 +52,6 @@ export const Progress = () => {
             // icon={icons[index]}
           />
         ))}
-        <div className="track">
-          <img
-            src={require("../images/track1.png")}
-            alt="track-1"
-            className="track-1"
-            id="track-1"
-          ></img>
-          <img
-            src={require("../images/track2.png")}
-            alt="track-2"
-            className="track-2"
-            id="track-2"
-          ></img>
-        </div>
       </div>
     </div>
   );

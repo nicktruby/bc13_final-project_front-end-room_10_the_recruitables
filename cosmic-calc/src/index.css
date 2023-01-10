@@ -26,7 +26,7 @@
 
 html {
   scroll-behavior: smooth;
-    background: url('./images/background-image.gif');
+  background: url('./images/background-image.gif');
   background-repeat: no-repeat;
    background-size: cover;
 }

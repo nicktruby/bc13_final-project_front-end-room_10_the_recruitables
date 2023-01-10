@@ -38,6 +38,7 @@
     background-image: url(../images/planet-2.png);
     left: 8vh;
     top: 25vh;
+
 }
 
 #levelButton-3 {
@@ -113,10 +114,11 @@
     bottom: 40vh;
 }
 
-
-
-
-
+#track-3 {
+    display: flex;
+    position: absolute;
+    width: 1000px;
+}
 
 
 
