@@ -1,7 +1,7 @@
 import React from "react";
-import "./levelButtons.css";
+import "./levelButton.css";
 
-function LevelButtons({ ButtonNumber, clickToGame }) {
+function LevelButton({ ButtonNumber, clickToGame }) {
   return (
     <div className="levelButton">
       <button
@@ -15,4 +15,4 @@ function LevelButtons({ ButtonNumber, clickToGame }) {
   );
 }
 
-export default LevelButtons;
+export default LevelButton;

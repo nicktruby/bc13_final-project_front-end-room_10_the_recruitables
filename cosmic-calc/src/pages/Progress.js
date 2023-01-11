@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import LevelButtons from "../components/buttons/LevelButtons";
+import LevelButton from "../components/buttons";
 import "./progress.css";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/navBar/NavBar";
@@ -58,14 +58,14 @@ export const Progress = () => {
       <button onClick={handleScoreIncrease}>MANUAL SCORE INCREASE</button>
       <div className="grid-container">
         {levels.map((levels, index) => (
-          <LevelButtons
+          <LevelButton
             clickToGame={handleGotoLevel}
             key={levels.level}
             ButtonNumber={index + 1 + "-unlock"}
           />
         ))}
         {lockLevels.map((level, index) => (
-          <LevelButtons key={levels.level} ButtonNumber={index + 1 + "-lock"} />
+          <LevelButton key={levels.level} ButtonNumber={index + 1 + "-lock"} />
         ))}
       </div>
     </div>

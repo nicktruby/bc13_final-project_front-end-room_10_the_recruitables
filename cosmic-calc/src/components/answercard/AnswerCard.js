@@ -1,5 +1,5 @@
 import React from "react";
-import NextQButton from "../buttons/NextQButton";
+import NextQButton from "../buttons";
 
 export default function AnswerCard(props) {
   return (
