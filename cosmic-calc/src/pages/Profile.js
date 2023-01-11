@@ -5,14 +5,20 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebaseConfig";
 // import { getFirestore, collection, getDocs } from "firebase/firestore";
 import NavBar from "../components/navBar/NavBar";
+import React from "react";
+import "./profile.css";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Game from "./Game";
+import profileImage from "../images/Background_Buttons/MonsterRed.png";
 
 function Profile() {
-  const [userData, setUserData] = useState({});
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+const [userData, setUserData] = useState({});
+useEffect(()=>{
+onAuthStateChanged(auth, (user) => {
       retrieveUserData(user);
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,23 +38,40 @@ function Profile() {
     return data.payload;
   };
 
-  // useEffect(() => {
-  // }, []);
+  const navigate = useNavigate();
 
-  // //need to call this function once the user is logged in in the handleClick function
-  // useEffect(() => {
-  //   retrieveOrCreateUser();
-  // }, [user]);
+  const handleGame = () => {
+    navigate("/game");
+  };
 
   return (
+
     <div>
       <NavBar />
       <h3>Profile</h3>
       <h4>{userData.email}</h4>
       {/* <h4>{userData.displayName}</h4> */}
       <h4>{userData.total_score} </h4>
+
+    <div className="profilePageDiv">
+      <img className="profileImage" src={profileImage} alt="profileImage" />
+
+      <div className="profileDiv">
+        {/* <h3 className="welcome">Welcome</h3> */}
+        {/* <h4 className="name">Lucy McHugh</h4> */}
+        <h4 className="username">Welcome MonsterLu!</h4>
+        <h4 className="score">Total score: 8 </h4>
+        <button className="gameButton" onClick={handleGame}>
+          Let's play!
+        </button>
+      </div>
+
+      <Routes>
+        <Route path="/game" element={<Game />} />
+      </Routes>
+
     </div>
   );
-}
+};
 
 export default Profile;

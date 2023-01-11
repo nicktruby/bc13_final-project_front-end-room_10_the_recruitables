@@ -12,10 +12,20 @@
 
 :root {
   /* --colour-bg: #012a3e; */
-  --colour-bg2: #52366c;
-  --colour-primary: #00621c;
-  --colour-secondary: #e79fc4;
-  --colour-tertiary: #fce30a;
+  --colour-purple: #501785;
+  --colour-purple-transparent: #914dd1d2;
+  --colour-green: #00621c;
+  --colour-green-transparent: #00621cbe;
+  --colour-pink: #e79fc4;
+  --colour-pink-transparent: #e79fc4d2;
+  --colour-yellow: #fce30a;
+  --colour-yellow-transparent: #fce40abd;
+  --colour-red: #e60000;
+  --colour-red-transparent: #e60000bd;
+  --colour-blue: #00a3e6;
+  --colour-blue-transparent: #00a5e6be;
+  --colour-orange: #ff6600;
+  --colour-orange-transparent: #ff6600be;
   --colour-white: #fff;
   --colour-light: rgba(255, 255, 255, 0.803);
   --container-width-lg: 75%;
@@ -24,18 +34,19 @@
   --transition: 400ms;
 }
 
-html {
+/* html {
   scroll-behavior: smooth;
   background: url('./images/background-image.gif');
   background-repeat: no-repeat;
    background-size: cover;
-}
+} */
 
 body {
   font-family: "Bubblegum Sans", sans-serif;
   /* background-color: var(--colour-bg); */
   color: var(--colour-light);
   line-height: 1.7;
+  font-size: 3vw;
 }
 
 .container {
