@@ -49,7 +49,7 @@ function Register() {
 
   return (
     <div>
-      <NavBarLogin />
+      {/* <NavBarLogin /> */}
       <form onSubmit={handleRegister}>
         <input
           type="text"
