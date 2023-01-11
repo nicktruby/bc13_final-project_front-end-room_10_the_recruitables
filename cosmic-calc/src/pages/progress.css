@@ -70,6 +70,7 @@
     left: 80vh;
     height: 10vh;
     width: 10vh;
+    top: 25vh;
     filter: grayscale(100%);
     z-index: 1;
 }
@@ -152,6 +153,7 @@
 #levelButton-5-unlock {
     background-image: url(../images/planet-5.png);
     left: 80vh;
+    top: 25vh;
     height: 10vh;
     width: 10vh;
     z-index: 2;

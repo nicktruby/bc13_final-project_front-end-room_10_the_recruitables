@@ -13,10 +13,9 @@ export const Progress = () => {
   const [score, setScore] = useState(0);
   // count for array of levels. New level pushed into array ever X amount of points. Then mapped below to return a new button each time score level reached.
   const [levels, setLevels] = useState([1]);
-  const [lockLevels, setLockLevels] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const [lockLevels, setLockLevels] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   const [payload, setPayload] = useState([]);
   const [totalScore, setTotalScore] = useState();
-  let planets = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   // handles bringing in new buttons when the score increases. Set to new button every 5 points. Added button to manually increase score in the mean time - will remove later.
 
@@ -31,43 +30,18 @@ export const Progress = () => {
       return data.payload.total_score;
     };
 
-    getScore(6);
+    getScore(1);
+    let unlockedLevels = [...levels.slice(0, Math.floor(score / 10))];
+    setLevels(unlockedLevels);
+    console.log(levels);
 
-    switch (Math.round(totalScore / 100) * 100) {
-      case 100:
-        setLevels([1, 2]);
-        break;
-      case 200:
-        setLevels([1, 2, 3]);
-        break;
-      case 300:
-        setLevels([1, 2, 3, 4]);
-        break;
-      case 400:
-        setLevels([1, 2, 3, 4, 5]);
-        break;
-      case 500:
-        setLevels([1, 2, 3, 4, 5, 6]);
-        break;
-      case 600:
-        setLevels([1, 2, 3, 4, 5, 6, 7]);
-        break;
-      case 700:
-        setLevels([1, 2, 3, 4, 5, 6, 7, 8]);
-        break;
-      case 800:
-        setLevels([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-        break;
-      case 900:
-        setLevels([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-        break;
-      case 1000:
-        setLevels([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-        break;
-      default:
-        // Handle other cases here or do nothing
-        break;
-    }
+    if (payload.total_score >= 100) {
+      let unlockedLevels = [
+        ...lockLevels.slice(0, Math.floor(payload.total_score / 100)),
+      ];
+      console.log("this is unlocked levels", unlockedLevels);
+      setLevels(unlockedLevels);
+    } else setLevels([1]);
   }
   // every 100 points or more new planet
   // set up the navigation variables and function
