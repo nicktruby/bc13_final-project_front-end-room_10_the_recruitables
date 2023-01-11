@@ -7,17 +7,11 @@ import { auth } from "./firebaseConfig";
 import NavBar from "../components/navBar/NavBar";
 
 function Profile() {
-  const [user, setUser] = useState({});
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-        retrieveUserData(user);
-      } else {
-        setUser(null);
-      }
+      retrieveUserData(user);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
