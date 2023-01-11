@@ -9,7 +9,7 @@ function LevelButton({ buttonNumber, clickToGame }) {
         onClick={clickToGame}
         id={`levelButton-${buttonNumber}`}
       >
-        {/* BUTTON {ButtonNumber} */}
+        BUTTON {buttonNumber}
       </button>
     </div>
   );
