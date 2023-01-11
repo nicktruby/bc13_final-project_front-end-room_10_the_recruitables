@@ -61,11 +61,11 @@ export const Progress = () => {
           <LevelButton
             clickToGame={handleGotoLevel}
             key={levels.level}
-            ButtonNumber={index + 1 + "-unlock"}
+            buttonNumber={index + 1 + "-unlock"}
           />
         ))}
         {lockLevels.map((level, index) => (
-          <LevelButton key={levels.level} ButtonNumber={index + 1 + "-lock"} />
+          <LevelButton key={levels.level} buttonNumber={index + 1 + "-lock"} />
         ))}
       </div>
     </div>

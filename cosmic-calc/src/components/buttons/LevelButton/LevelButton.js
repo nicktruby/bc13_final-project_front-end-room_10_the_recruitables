@@ -1,13 +1,13 @@
 import React from "react";
 import "./levelButton.css";
 
-function LevelButton({ ButtonNumber, clickToGame }) {
+function LevelButton({ buttonNumber, clickToGame }) {
   return (
     <div className="levelButton">
       <button
         className={"levelButtons"}
         onClick={clickToGame}
-        id={`levelButton-${ButtonNumber}`}
+        id={`levelButton-${buttonNumber}`}
       >
         {/* BUTTON {ButtonNumber} */}
       </button>
