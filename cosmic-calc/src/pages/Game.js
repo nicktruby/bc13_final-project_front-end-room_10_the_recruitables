@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./game.css";
+import astronaut from "../images/Background_Buttons/Astronaut.png";
 
 export default function Game() {
   let id = 6;
@@ -9,21 +10,8 @@ export default function Game() {
   const [result, setResult] = useState("");
   const [score, setScore] = useState(0);
   const [answerVisible, setAnswerVisible] = useState(false);
-  // const [nextQButtonVisible, setNextQButtonVisible] = useState(false);
   const [noOfQuestions, setNoOfQuestions] = useState(1);
-  const [totalScore, setTotalScore] = useState(0);
-  const [payload, setPayload] = useState({});
-
-  // get request to get total_score
-  // const getScore = async (id) => {
-  //   const response = await fetch(`http://localhost:3000/api/users/${id}`);
-  //   const data = await response.json();
-  //   console.log(data.payload.total_score);
-  //   setPayload(data.payload);
-  //   setTotalScore(data.payload.total_score);
-  //   return data.payload.total_score;
-  // };
-
+  
   useEffect(() => {
     if (noOfQuestions === 4) {
       updateScore(score, id);
@@ -35,12 +23,10 @@ export default function Game() {
     if (parseInt(answer) === num1 * num2) {
       setResult("Correct!");
       setScore(Number(score) + 1);
-      // setAnswerVisible(false)
       newQuestion();
     } else {
       setResult(num1 * num2);
       setAnswerVisible(true);
-      // setNextQButtonVisible(true);
     }
   };
   const newQuestion = () => {
@@ -52,14 +38,6 @@ export default function Game() {
   };
 
   const updateScore = async (score, id) => {
-    // console.log("total", totalScore);
-    // console.log("data", payload);
-    // console.log("score", score.total_score);
-    // console.log("type of score", typeof score);
-    // let newTotal = score.total_score + totalScore;
-    // console.log("newScore", newTotal);
-    // console.log(typeof totalScore);
-    // console.log("id", id);
     const response = await fetch(
       `http://localhost:3000/api/users/${id}/updateTotalScore`,
       {
@@ -88,7 +66,7 @@ export default function Game() {
             <h3 className="h3ResultAnswerGame">{result}</h3>
           </div>
           <button
-            className="newQuestionGame"
+            className="newQuestionGameButton"
             onClick={newQuestion}
             style={{ visibility: answerVisible ? "visible" : "hidden" }}
           >
@@ -122,13 +100,15 @@ export default function Game() {
       </div>
     );
   } else {
-    //getScore(id);
 
     return (
-      <div>
+      <div className="endDiv">
+      <img className="astronaut" src={astronaut} alt="astronaut" />
+      <div className="endGameDiv">
         <h1>Game Over!</h1>
         <h2>Your final score was {score}</h2>
-        <button onClick={newQuestion}>Play Again</button>
+        <button className="endGameButton" onClick={newQuestion}>Play Again</button>
+      </div>
       </div>
     );
   }

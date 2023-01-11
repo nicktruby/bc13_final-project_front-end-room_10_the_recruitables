@@ -41,7 +41,7 @@ function Login() {
 
   return (
     <div>
-      <NavBarLogin />
+      {/* <NavBarLogin /> */}
       <form onSubmit={handleLogin}>
         <input
           type="text"

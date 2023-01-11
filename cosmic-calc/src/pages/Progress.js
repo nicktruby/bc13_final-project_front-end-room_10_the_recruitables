@@ -43,7 +43,7 @@ export const Progress = () => {
   // then maps over the levels array which returns a button for each new item in the array. Array increases depending on score. New item every 5 points = new button returned.
   return (
     <div className="progress-page">
-      <NavBar />
+      {/* <NavBar /> */}
       <button onClick={handleScoreIncrease}>MANUAL SCORE INCREASE</button>
       <div className="grid-container">
         {levels.map((levels, index) => (
